@@ -16,6 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
+
        $result = User::all();
 
         return $result;
@@ -50,9 +51,10 @@ class UserController extends Controller
 
     public function sendMail($email){
 
+        // save str to redis
         $checkStr = md5(md5($email));
 
-        $web = "http://localhost/users/verify/";
+        $web = env("APP_URL")."/users/verify/";
 
         $url = $web . $checkStr;
 
@@ -138,7 +140,7 @@ class UserController extends Controller
     }
 
     /**
-     * Verify the specified resource from storage.
+     * Verify the specified resource
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
@@ -166,7 +168,7 @@ class UserController extends Controller
     }
 
     /**
-     * Verify the specified resource from storage.
+     * Read the specified resource
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
